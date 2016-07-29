@@ -116,7 +116,7 @@
 
 	        console.log(subreddit);
 	        if (subreddit.length > 0) {
-	            $.getJSON('http://www.reddit.com/r/' + subreddit + '/' + type + '.json?' + 'limit=' + limit + '&after=' + after, function (res) {
+	            $.getJSON('//www.reddit.com/r/' + subreddit + '/' + type + '.json?' + 'limit=' + limit + '&after=' + after, function (res) {
 	                parent.setState({
 	                    subredditData: parent.state.subredditData.concat(res.data.children),
 	                    lastRedditPostID: res.data.children[res.data.children.length - 1].data.name
@@ -130,7 +130,7 @@
 	                parent.stopSpinner();
 	            }); // If error, redirect to homepage
 	        } else {
-	            $.getJSON('http://www.reddit.com/new.json?' + 'limit=' + limit + '&after=' + after, function (res) {
+	            $.getJSON('//www.reddit.com/new.json?' + 'limit=' + limit + '&after=' + after, function (res) {
 	                parent.setState({
 	                    subredditData: parent.state.subredditData.concat(res.data.children),
 	                    lastRedditPostID: res.data.children[res.data.children.length - 1].data.name
