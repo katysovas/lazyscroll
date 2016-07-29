@@ -114,7 +114,6 @@
 	        this.startSpinner();
 	        var type = 'new';
 
-	        console.log(subreddit);
 	        if (subreddit.length > 0) {
 	            $.getJSON('//www.reddit.com/r/' + subreddit + '/' + type + '.json?' + 'limit=' + limit + '&after=' + after, function (res) {
 	                parent.setState({
@@ -148,7 +147,7 @@
 
 	    getInitialState: function () {
 	        return {
-	            subreddit: this.loadLocalStorage('subreddit') || '',
+	            subreddit: this.loadLocalStorage('subreddit') || 'historyporn',
 	            subredditLimit: this.loadLocalStorage('subredditLimit') || 10,
 	            spinnerDisplay: true,
 	            subredditData: [],
