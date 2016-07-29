@@ -45446,7 +45446,7 @@
 
 
 	  cleanTitle: function () {
-	    let title = this.props.title;
+	    var title = this.props.title;
 	    title = title.split("[");
 	    title = title[0].replace('PsBattle:', '');
 	    return title;
