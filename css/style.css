@@ -1,0 +1,378 @@
+/* Spinner */
+
+#spin {
+  position:fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.meta {
+  padding-top: 25px;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+
+  position: relative;
+}
+
+.double-bounce1, .double-bounce2 {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #000;
+  opacity: 0.6;
+  position: absolute;
+  top: 0;
+  left: 0;
+  
+  -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
+  animation: sk-bounce 2.0s infinite ease-in-out;
+}
+
+.double-bounce2 {
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+
+@-webkit-keyframes sk-bounce {
+  0%, 100% { -webkit-transform: scale(0.0) }
+  50% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes sk-bounce {
+  0%, 100% { 
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  } 50% { 
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+  }
+}
+
+/* Menu */
+div.ui.menu > .header, div.ui.menu > a {
+  font-size: 1.5em;
+}
+
+div.ui.menu > .item > form {
+  margin: auto 0.3em auto 0.3em;
+}
+
+div.ui.menu > .item > form > div > input {
+  width: 75%;
+}
+
+#card-container {
+  margin-top: 1em;
+}
+
+@media only screen and (max-width: 767px) {
+  .mobile-hide {
+    display: none !important;
+  }
+
+  .share i {
+    font-size: 30px !important;
+  }
+
+  .facebook i {
+    font-size: 25px !important;
+  }
+}
+
+.share i {
+  font-size: 50px;
+  margin-top: -30px;
+  padding-left: 15px;
+}
+
+.facebook i {
+  font-size: 45px;
+}
+
+.pulldown{
+  margin: 25px auto 15px auto;
+  width: 38px;
+}
+.pulldown{
+  position: relative;
+}
+
+.pulldown .pulldown-toggle{
+  cursor: pointer;
+}
+
+.pulldown .pulldown-toggle-round{
+  height: 38px;
+  width: 38px;
+  border: 1px solid #bbb;
+  border-radius: 19px;
+  cursor: pointer;
+  background-color: #fff;
+}
+
+.pulldown .pulldown-menu{
+  position: absolute;
+  top: 46px;
+  left: 0px;
+  width: 180px;
+  background-color: #fff;
+  border-radius: 4px;
+  display: none;
+  z-index: 10;
+
+  box-shadow: 0px 2px 12px rgba(0,0,0,.2);
+}
+
+.pulldown-right .pulldown-menu{
+  left: auto;
+  right: 0px;
+}
+
+.pulldown-toggle.open + .pulldown-menu{
+  display: block;
+
+  -webkit-animation-name: openPullDown;
+  animation-name: openPullDown;
+
+  -webkit-animation-duration: 100ms;
+  animation-duration: 100ms;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+
+  -webkit-transform-origin: left top;
+  transform-origin: left top;
+}
+
+.pulldown-right .pulldown-toggle.open + .pulldown-menu{
+  -webkit-transform-origin: right top;
+  transform-origin: right top;
+}
+
+.pulldown-menu ul{
+  list-style: none;
+  padding: 0;
+  margin: 4px 0;
+}
+
+.pulldown-menu ul li{
+  padding: 0;
+  margin: 0;
+}
+
+.pulldown-menu ul li a{
+  display: block;
+  height: 34px;
+  padding: 0 10px;
+  line-height: 34px;
+  cursor: pointer;
+  color: #555;
+  text-decoration: none;
+}
+
+.pulldown-menu ul li a:hover{
+  background-color: #f5f5f5;
+}
+
+
+.pulldown-toggle-round{
+  position: relative;
+}
+
+.pulldown-toggle-round .lines{
+  position: absolute;
+  top: 18px;
+  left: 9px;
+
+  display: inline-block;
+  width: 20px;
+  height: 2px;
+  background: #888;
+  border-radius: 1px;
+
+  transition: all 200ms;
+}
+
+.pulldown-toggle-round .lines::before{
+  position: absolute;
+  top: -6px;
+
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 2px;
+  background: #888;
+  border-radius: 1px;
+
+  transform-origin: 50% 50%;
+  transition: all 200ms;
+}
+
+.pulldown-toggle-round .lines::after{
+  position: absolute;
+  top: 6px;
+
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 2px;
+  background: #888;
+  border-radius: 1px;
+
+  transform-origin: 50% 50%;
+  transition: all 200ms;
+}
+
+
+/* when open lines positions */
+.pulldown-toggle-round.open .lines{
+  background: transparent;
+}
+
+.pulldown-toggle-round.open .lines::before{
+  top: 0px;
+  transform: rotate3d(0, 0, 1, 45deg);
+  -webkit-transform: rotate3d(0, 0, 1, 45deg);
+}
+
+.pulldown-toggle-round.open .lines::after{
+  top: 0px;
+  transform: rotate3d(0, 0, 1, -45deg);
+  -webkit-transform: rotate3d(0, 0, 1, -45deg);
+}
+
+
+
+
+@media (max-width: 550px) {
+  .pulldown .pulldown-menu{
+    position: fixed;
+    
+    top: auto!important;
+    left: 0px!important;
+    right: 0px!important;
+    bottom: 0px!important;
+    
+    width: 100%;
+    background-color: rgba(0, 0, 0, .2);
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  .meta {
+    padding-top: 15px;
+  }
+
+  .pulldown-toggle.open + .pulldown-menu{
+    -webkit-animation-name: openPullDownMobile;
+    animation-name: openPullDownMobile;
+
+    -webkit-animation-duration: 200ms;
+    animation-duration: 200ms;
+  }
+
+  .pulldown-menu ul{
+    margin: 10px;
+  }
+
+  .pulldown-menu ul li a{
+    display: block;
+    height: 60px;
+    padding: 0 10px;
+    line-height: 60px;
+    cursor: pointer;
+    color: $primaryText;
+    text-decoration: none;
+    font-size: 25px;
+  }
+
+  .pulldown-menu ul li a i {
+    padding-right: 20px;
+    padding-left: 10px;
+  }
+
+  .pulldown .pulldown-menu li{
+    background-color: #fff;
+    margin-bottom: 1px;
+  }
+}
+
+@-webkit-keyframes openPullDown {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale(.7);
+    transform: scale(.7);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+@keyframes openPullDown {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale(.7);
+    -ms-transform: scale(.7);
+    transform: scale(.7);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+@-webkit-keyframes openPullDownMobile {
+  0% {
+    -webkit-transform: translate(0%, 100%);
+    transform: translate(0%, 100%);
+  }
+
+  100% {
+    -webkit-transform: translate(0%, 0%);
+    transform: translate(0%, 0%);
+  }
+}
+
+@keyframes openPullDownMobile {
+  0% {
+    -webkit-transform: translate(0%, 100%);
+    -ms-transform: translate(0%, 100%);
+    transform: translate(0%, 100%);
+  }
+
+  100% {
+    -webkit-transform: translate(0%, 0%);
+    -ms-transform: translate(0%, 0%);
+    transform: translate(0%, 0%);
+  }
+}
+
+.givememore {
+  width: 50% !important;
+}
+
+.randomize {
+  width: 50% !important;
+}
+
+.button {
+  margin: 0 !important;
+  display: inline !important;
+  padding: 0.785714em 1.2em !important;
+}
+
+

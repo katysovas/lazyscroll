@@ -134,8 +134,6 @@
 	                    subredditData: parent.state.subredditData.concat(res.data.children),
 	                    lastRedditPostID: res.data.children[res.data.children.length - 1].data.name
 	                });
-	                console.log('Fetch Home Success');
-	                console.log(parent.state.lastRedditPostID);
 	                parent.stopSpinner();
 	            }) // If no subreddit given, fetch reddit homepage.  
 	            .error(function () {
@@ -156,10 +154,13 @@
 	    },
 
 	    componentWillMount: function () {
+	        window.removeEventListener('scroll', this.handleScroll);
 	        this.fetchSubredditData(this.state.subreddit, this.state.subredditLimit, this.state.lastRedditPostID);
 	    },
 
 	    componentDidMount: function () {
+
+	        window.addEventListener('scroll', this.handleScroll);
 
 	        // reference to last opened menu
 	        var $lastOpened = false;
@@ -198,12 +199,25 @@
 	        localStorage.state = JSON.stringify(this.state);
 	    },
 
-	    render: function () {
+	    loadImages: function () {
 	        var renderCard;
-	        if (this.state.subredditData != []) {
+	        if (this.state.subredditData.length > 0) {
 	            renderCard = React.createElement(Card, { data: this.state.subredditData, loadRandom: this.loadRandomHandler, loadMore: this.loadMoreHandler });
 	        }
+	        return renderCard;
+	    },
 
+	    handleScroll: function () {
+
+	        var scrollTop = document.documentElement && document.documentElement.scrollTop || document.body.scrollTop;
+	        var scrollHeight = document.documentElement && document.documentElement.scrollHeight || document.body.scrollHeight;
+	        var scrolledToBottom = scrollTop + window.innerHeight >= scrollHeight;
+	        if (scrolledToBottom && this.state.subredditData.length > 0) {
+	            this.loadMoreHandler();
+	        }
+	    },
+
+	    render: function () {
 	        return React.createElement(
 	            'div',
 	            null,
@@ -215,9 +229,10 @@
 	                React.createElement(
 	                    'div',
 	                    { className: 'twelve wide column' },
-	                    renderCard
+	                    this.loadImages()
 	                )
-	            )
+	            ),
+	            React.createElement(Menu, { subreddit: this.state.subreddit, limit: this.state.subredditLimit, onSubmit: this.handleMenuSubmit })
 	        );
 	    }
 	});
@@ -31348,17 +31363,7 @@
 	                    React.createElement(CardImage, { imgURL: imgURL, linkURL: linkURL }),
 	                    React.createElement(CardContent, { imgURL: imgURL, title: title, postURL: postURL, dateRelative: dateRelative, dateAbsolute: dateAbsolute })
 	                );
-	            }),
-	            React.createElement(
-	                'div',
-	                { className: 'buttons' },
-	                React.createElement(
-	                    'button',
-	                    { className: 'ui fluid huge blue basic button givememore', onClick: this.props.loadMore },
-	                    'More ',
-	                    React.createElement('i', { className: 'fa fa-arrow-down', 'aria-hidden': 'true' })
-	                )
-	            )
+	            })
 	        );
 	    }
 	});
@@ -45545,7 +45550,7 @@
 	                    onClick: this.handleSubredditChange.bind(this, 'historyporn')
 	                  },
 	                  React.createElement('i', { className: 'fa fa-bank', 'aria-hidden': 'true' }),
-	                  ' History '
+	                  ' History'
 	                )
 	              ),
 	              React.createElement(
